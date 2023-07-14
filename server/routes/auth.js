@@ -25,7 +25,7 @@ router.post('/sender', async (req, res) => {
     return res.status(400).send('Invalid email or password');
   }
   const token = sender.generateAuthToken();
-  res.send(token);
+  res.send({ token: token });
 });
 
 router.post('/biker', async (req, res) => {
@@ -44,7 +44,7 @@ router.post('/biker', async (req, res) => {
     return res.status(400).send('Invalid email or password');
   }
   const token = biker.generateAuthToken();
-  res.send(token);
+  res.send({ token: token });
 });
 
 const validate = (req) => {

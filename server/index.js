@@ -1,3 +1,4 @@
+const cors = require('cors');
 const config = require('config');
 const mongoose = require('mongoose');
 const express = require('express');
@@ -13,6 +14,7 @@ if (!config.get('jwtPrivateKey')) {
 }
 
 app.use(express.json());
+app.use(cors());
 
 mongoose
   .connect('mongodb://127.0.0.1:27017/delivery', {
@@ -27,5 +29,5 @@ app.use('/api/senders', senders);
 app.use('/api/bikers', bikers);
 app.use('/api/auth', auth);
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 app.listen(port, () => console.log(`Listening on port ${port}...`));

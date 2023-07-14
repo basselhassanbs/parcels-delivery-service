@@ -47,7 +47,7 @@ const validateParcel = (parcel) => {
     status: Joi.string(),
     pickUpTime: Joi.date(),
     dropOffTime: Joi.date(),
-    sender: Joi.objectId().required(),
+    sender: Joi.objectId(),
     biker: Joi.objectId(),
   });
   return schema.validate(parcel);
