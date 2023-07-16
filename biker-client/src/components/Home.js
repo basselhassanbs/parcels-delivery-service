@@ -1,16 +1,18 @@
-import React, { useEffect } from 'react';
-import { fetchParcels } from '../state/actions/parcels';
+import React, { useEffect, useState } from 'react';
+import { deliverParcel, fetchParcels } from '../state/actions/parcels';
 import { useDispatch, useSelector } from 'react-redux';
+import DeliverModal from './DeliverModal';
 
 const Home = () => {
-  const { data, loading, error } = useSelector((state) => state.parcels);
+  const { parcels, loading, error } = useSelector((state) => state.parcels);
+  const [parcelId, setParcelId] = useState('');
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchParcels());
   }, []);
+
   return (
     <div>
-      {loading && <h3>Loading...</h3>}
       <>
         <h4>Your parcels list</h4>
         <table className='table  table-striped '>
@@ -22,18 +24,19 @@ const Home = () => {
               <th scope='col'>Status</th>
               <th scope='col'>Pick-up Time</th>
               <th scope='col'>Drop-off Time</th>
+              <th scope='col'>Action</th>
             </tr>
           </thead>
           <tbody>
-            {data && data.length === 0 && (
+            {parcels && parcels.length === 0 && (
               <tr>
                 <td style={{ textAlign: 'center' }} colSpan='6'>
                   No data to display{' '}
                 </td>
               </tr>
             )}
-            {data &&
-              data.map((parcel) => (
+            {parcels &&
+              parcels.map((parcel) => (
                 <tr key={parcel._id}>
                   <td>{parcel.description}</td>
                   <td>{parcel.pickUpAddress}</td>
@@ -41,10 +44,25 @@ const Home = () => {
                   <td>{parcel.status}</td>
                   <td>{parcel.pickUpTime || '-'}</td>
                   <td>{parcel.dropOffTime || '-'}</td>
+                  <td>
+                    {parcel.status === 'picked' ? (
+                      <button
+                        onClick={() => setParcelId(parcel._id)}
+                        className='btn btn-primary'
+                        data-bs-toggle='modal'
+                        data-bs-target='#modal'
+                      >
+                        Deliver
+                      </button>
+                    ) : (
+                      'No action available'
+                    )}
+                  </td>
                 </tr>
               ))}
           </tbody>
         </table>
+        <DeliverModal parcelId={parcelId} />
       </>
     </div>
   );

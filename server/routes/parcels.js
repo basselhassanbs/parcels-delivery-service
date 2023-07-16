@@ -48,6 +48,8 @@ router.patch('/:id/pickup', [auth, allowed('biker')], async (req, res) => {
   parcel.set({
     status: 'picked',
     biker: req.user._id,
+    pickUpTime: req.body.pickUpTime,
+    dropOffTime: req.body.dropOffTime,
   });
   parcel = await parcel.save();
 
@@ -59,7 +61,7 @@ router.patch('/:id/deliver', [auth, allowed('biker')], async (req, res) => {
   if (!parcel)
     return res.status(404).send('The parcel with the given ID was not found.');
 
-  if (parcel.biker !== req.user._id || parcel.status !== 'picked')
+  if (parcel.biker != req.user._id || parcel.status !== 'picked')
     return res
       .status(400)
       .send("The parcel with the given ID can't be delivered.");

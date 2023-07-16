@@ -1,22 +1,30 @@
-import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { createParcel } from '../state/actions/parcels';
+import { useNavigate } from 'react-router-dom';
 
 const NewParcel = () => {
-  const [description, setDescription] = useState('');
-  const [pickUpAddress, setPickUp] = useState('');
-  const [dropOffAddress, setDropOff] = useState('');
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [parcel, setParcel] = useState({
+    description: '',
+    pickUpAddress: '',
+    dropOffAddress: '',
+  });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      createParcel({
-        description,
-        pickUpAddress,
-        dropOffAddress,
+      createParcel(parcel, () => {
+        navigate('/');
       })
     );
+    setParcel({
+      description: '',
+      pickUpAddress: '',
+      dropOffAddress: '',
+    });
   };
   return (
     <div>
@@ -27,8 +35,10 @@ const NewParcel = () => {
             Description
           </label>
           <input
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            value={parcel.description}
+            onChange={(e) =>
+              setParcel({ ...parcel, description: e.target.value })
+            }
             id='description'
             className='form-control'
           />
@@ -38,8 +48,10 @@ const NewParcel = () => {
             Pick-up Address
           </label>
           <input
-            value={pickUpAddress}
-            onChange={(e) => setPickUp(e.target.value)}
+            value={parcel.pickUpAddress}
+            onChange={(e) =>
+              setParcel({ ...parcel, pickUpAddress: e.target.value })
+            }
             id='pick-up'
             className='form-control'
           />
@@ -49,13 +61,24 @@ const NewParcel = () => {
             Drop-off Address
           </label>
           <input
-            value={dropOffAddress}
-            onChange={(e) => setDropOff(e.target.value)}
+            value={parcel.dropOffAddress}
+            onChange={(e) =>
+              setParcel({ ...parcel, dropOffAddress: e.target.value })
+            }
             id='drop-off'
             className='form-control'
           />
         </div>
-        <button className='btn btn-primary'>Submit</button>
+        <button
+          disabled={
+            parcel.description === '' ||
+            parcel.dropOffAddress === '' ||
+            parcel.pickUpAddress === ''
+          }
+          className='btn btn-primary'
+        >
+          Add
+        </button>
       </form>
     </div>
   );

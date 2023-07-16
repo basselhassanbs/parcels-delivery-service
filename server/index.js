@@ -1,3 +1,4 @@
+require('dotenv').config();
 const cors = require('cors');
 const config = require('config');
 const mongoose = require('mongoose');
