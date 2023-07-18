@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchParcels, fetchWaitingParcels } from '../state/actions/parcels';
+import { fetchWaitingParcels } from '../state/actions/parcels';
 import { useDispatch, useSelector } from 'react-redux';
 import PickupModal from './PickupModal';
 

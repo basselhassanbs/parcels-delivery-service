@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { deliverParcel, fetchParcels } from '../state/actions/parcels';
+import { fetchParcels } from '../state/actions/parcels';
 import { useDispatch, useSelector } from 'react-redux';
 import DeliverModal from './DeliverModal';
 
@@ -30,7 +30,7 @@ const Home = () => {
           <tbody>
             {parcels && parcels.length === 0 && (
               <tr>
-                <td style={{ textAlign: 'center' }} colSpan='6'>
+                <td style={{ textAlign: 'center' }} colSpan='7'>
                   No data to display{' '}
                 </td>
               </tr>
