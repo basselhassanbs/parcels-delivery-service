@@ -4,7 +4,7 @@ Parcels Delivery Service consists of the backend and a dashboard for the senders
 
 ## Description
 
-- A sender should be able to create a parcel to be delivered by specifying pick-up and drop-off address (should be just a text field, no need for address validation)
+- A sender should be able to create a parcel to be delivered by specifying pick-up and drop-off address.
 - A sender should be able to see the status of his parcels.
 - A biker should be able to see a list of the parcels.
 - A biker should be able to pick up a parcel.
