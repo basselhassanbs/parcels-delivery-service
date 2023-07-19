@@ -5,10 +5,15 @@ import Home from './components/Home';
 import Login from './components/Login';
 import NewParcel from './components/NewParcel';
 import PrivateRoute from './components/PrivateRoute';
+import { useSelector } from 'react-redux';
+import Loader from './components/Loader';
 
 const App = () => {
+  const { loading } = useSelector((state) => state.parcels);
+
   return (
     <div>
+      {loading && <Loader />}
       <Navbar />
       <div className='p-3'>
         <Routes>
