@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { fetchParcels } from '../state/actions/parcels';
 import { useDispatch, useSelector } from 'react-redux';
 import DeliverModal from './DeliverModal';
+import { formatDate } from '../utils/date';
 
 const Home = () => {
   const { parcels, loading, error } = useSelector((state) => state.parcels);
@@ -42,8 +43,8 @@ const Home = () => {
                   <td>{parcel.pickUpAddress}</td>
                   <td>{parcel.dropOffAddress}</td>
                   <td>{parcel.status}</td>
-                  <td>{parcel.pickUpTime || '-'}</td>
-                  <td>{parcel.dropOffTime || '-'}</td>
+                  <td>{formatDate(parcel.pickUpTime)}</td>
+                  <td>{formatDate(parcel.dropOffTime)}</td>
                   <td>
                     {parcel.status === 'picked' ? (
                       <button

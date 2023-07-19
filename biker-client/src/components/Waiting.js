@@ -23,15 +23,15 @@ const Waiting = () => {
               <th scope='col'>Pick-up Address</th>
               <th scope='col'>Drop-off Address</th>
               <th scope='col'>Status</th>
-              <th scope='col'>Pick-up Time</th>
-              <th scope='col'>Drop-off Time</th>
+              {/* <th scope='col'>Pick-up Time</th>
+              <th scope='col'>Drop-off Time</th> */}
               <th scope='col'>Action</th>
             </tr>
           </thead>
           <tbody>
             {waitingParcels && waitingParcels.length === 0 && (
               <tr>
-                <td style={{ textAlign: 'center' }} colSpan='7'>
+                <td style={{ textAlign: 'center' }} colSpan='5'>
                   No data to display{' '}
                 </td>
               </tr>
@@ -43,8 +43,8 @@ const Waiting = () => {
                   <td>{parcel.pickUpAddress}</td>
                   <td>{parcel.dropOffAddress}</td>
                   <td>{parcel.status}</td>
-                  <td>{parcel.pickUpTime || '-'}</td>
-                  <td>{parcel.dropOffTime || '-'}</td>
+                  {/* <td>{parcel.pickUpTime || '-'}</td>
+                  <td>{parcel.dropOffTime || '-'}</td> */}
                   <td>
                     <button
                       className='btn btn-primary'
